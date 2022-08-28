@@ -19,6 +19,7 @@ class Job(models.Model):
     job_name = models.CharField(max_length=500)
     start_date = models.DateField()
     end_date = models.DateField()
+    current_job = models.BooleanField()
     def __str__(self):
         return self.job_name
     
