@@ -4,6 +4,6 @@ from . import views
 
 app_name = 'portfoilo'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('project/<str:project_shortname>/', views.project, name='project'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('project/<str:project_shortname>/', views.ProjectView.as_view(), name='project'),
 ]
