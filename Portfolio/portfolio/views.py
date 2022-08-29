@@ -5,17 +5,6 @@ from django.views import generic
 
 from .models import Project
 
-def project(request, project_shortname):
-    current_project = get_object_or_404(Project, project_shortname__exact=project_shortname)
-    return render(request, 'portfolio/project.html', {'current_project': current_project,})
-
-'''
-def index(request):
-    latest_project_list = Project.objects.all()
-    context = {'latest_project_list': latest_project_list,}
-    return render(request, 'portfolio/index.html', context)
-'''
-
 class IndexView(generic.ListView):
     template_name = 'portfolio/index.html'
     context_object_name = 'latest_project_list'
