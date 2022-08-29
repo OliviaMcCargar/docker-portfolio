@@ -6,9 +6,10 @@ from .models import Project
 def detail(request, project_id):
     return HttpResponse("You're looking at project %s." % project_id)
 
-def results(request, project_id):
-    response = "You're looking at the description of project %s."
-    return HttpResponse(response % project_id)
+def project(request, project_shortname):
+    current_project = Project.objects.get(project_shortname__exact=project_shortname)
+    context = {'current_project': current_project,}
+    return render(request, 'portfolio/project.html', context)
 
 def index(request):
     latest_project_list = Project.objects.all()

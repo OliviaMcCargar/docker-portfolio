@@ -34,6 +34,7 @@ class Responsibility(models.Model):
 class Project(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=200)
+    project_shortname = models.CharField(max_length=20, unique=True)
     description = models.CharField(max_length=2000)
     outcome = models.CharField(max_length=2000)
     timeline = models.CharField(max_length=200)
