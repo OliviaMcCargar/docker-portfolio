@@ -11,7 +11,7 @@
 {% if latest_project_list %}
     <ul>
     {% for project in latest_project_list %}
-    <li>{{project.project_name}}</li>
+    <li><a href="{% url 'portfoilo:project' project.project_shortname %}">{{project.project_name}}</a></li>
     {% endfor %}
     </ul>
 {% else %}
