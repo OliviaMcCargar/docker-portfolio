@@ -1,9 +1,10 @@
+from pickle import TRUE
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 
-from .models import Project
+from .models import Project, Job
 
 class IndexView(generic.ListView):
     template_name = 'portfolio/index.html'
@@ -11,6 +12,11 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return Project.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['jobs'] = Job.objects.filter(current_job=True)
+        return context
 
 class ProjectView(generic.DetailView):
     model = Project

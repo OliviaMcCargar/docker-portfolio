@@ -1,10 +1,35 @@
-body {
-  font: 100% Helvetica, sans-serif;
-  color: #333;
+.nav-link {
+  color: #480579;
+}
+.nav-link:hover {
+  color: #8338B9;
 }
 
-.headshot {
-  width: 10%;
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #FFF;
+  background-color: #480579;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: #480579;
+}
+
+.headshot img {
+  width: 100%;
+}
+
+.job_desc {
+  margin-bottom: 1em;
+}
+.job_desc p {
+  margin: 0;
+}
+.job_desc p.title {
+  font-size: 1.1em;
+}
+.job_desc p.location {
+  font-style: italic;
+  font-weight: 200;
 }
 
 /*# sourceMappingURL=style.css.map */
