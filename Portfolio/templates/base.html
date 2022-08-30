@@ -11,7 +11,7 @@
     {% block stylesheets %}
     {% endblock %}
   </head>
-  <body>
+  <body {% block bodyclasses %}{% endblock %} >
     {% block content %}{% endblock %}
     <script src="{% static 'libs/jquery/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

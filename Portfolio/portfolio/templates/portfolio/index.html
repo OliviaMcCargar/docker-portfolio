@@ -5,51 +5,68 @@
 {% block title %}Olivia McCargar | Portfolio{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{% static 'portfolio/style/cover.css' %}">
+<!--<link rel="stylesheet" href="{% static 'portfolio/style/cover.css' %}">-->
 {% endblock %}
 
+{% block bodyclasses %}style="position: relative;" data-bs-spy="scroll" data-bs-target="#primary-navbar"{% endblock %}
+
 {% block content %}
-<div class="site-wrapper">
-
-    <div class="site-wrapper-inner">
-
-      <div class="cover-container">
-
-        <div class="masthead clearfix">
-          <div class="inner">
-            <nav>
-              <ul class="nav masthead-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Resume</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-
-        <div class="inner cover">
-          <h1 class="cover-heading">Olivia McCargar</h1>
-          <p class="lead">Up and coming Data Engineer</p>
-          <p class="lead">
-            <a href="#" class="btn btn-lg btn-default">Projects</a>
-          </p>
-        </div>
-
+<nav id="primary-navbar" class="navbar sticky-top bg-light px-3">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" href="#aboutme">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#resume">Resume</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#projects" role="button" aria-expanded="false">Projects</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#projects">Projects Overview</a></li>
+        <li><hr class="dropdown-divider"></li>
+        {% for project in latest_project_list %}
+        <li><a class="dropdown-item" href="{% url 'portfoilo:project' project.project_shortname %}">{{project.project_name}}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+  <a class="navbar-brand" href="/">OKM</a>
+</nav>
+<div id="aboutme" class="p-4" style="width:100%; height:10px;"></div>
+<div class="p-5 min-vh-100 d-inline-block">
+  <h4>About Me</h4>
+  <div class="row">
+    <div class="col-3">
+      <div class="headshot">
+        <img class="rounded" src="{% static 'images/liv_headshot.png' %}" alt="Headshot of Olivia">
       </div>
-
     </div>
-
+    <div class="col-9">
+      <p>I am actively looking for the right company for me.</p>
+      <p>I am a long time freelance graphic designer and web developer turned engineer. Over the last several years I have completed my Masters of Science in Computer Science with a focus on applied data analytics, making me an ideal data engineer for any team.</p>
+      <p>My approach to solving problems is by diving in, getting my hands dirty, making mistakes, and asking for help. I'm a natural leader, a problem solver, and have an affinity for statistics.</p>
+      <h5>Current Roles</h5>
+      {% for job in jobs %}
+      <div class="job_desc">
+        <p class="location">{{ job.company }}: {{ job.department }}</p>
+        <p class="title">{{ job.job_name }}</p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-<!-- 
-{% if latest_project_list %}
-    <ul>
-    {% for project in latest_project_list %}
-    <li><a href="{% url 'portfoilo:project' project.project_shortname %}">{{project.project_name}}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No projects are available.</p>
-{% endif %}
--->
+</div>
+<div id="resume" class="p-4" style="width:100%; height:10px;"></div>
+<div class="p-5 min-vh-100 d-inline-block">
+  <h4>Resume</h4>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+</div>
+<div id="projects" class="p-4" style="width:100%; height:10px;"></div>
+<div class="p-5 min-vh-100 d-inline-block">
+  <h4>Third heading</h4>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+</div>
 {% endblock %}
