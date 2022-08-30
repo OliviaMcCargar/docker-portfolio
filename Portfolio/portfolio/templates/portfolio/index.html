@@ -16,9 +16,6 @@
     <li class="nav-item">
       <a class="nav-link" href="#aboutme">About</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#resume">Resume</a>
-    </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#projects" role="button" aria-expanded="false">Projects</a>
       <ul class="dropdown-menu">
@@ -29,12 +26,15 @@
         {% endfor %}
       </ul>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#resume">Resume</a>
+    </li>
   </ul>
   <a class="navbar-brand" href="/">OKM</a>
 </nav>
 <div id="aboutme" class="p-4" style="width:100%; height:10px;"></div>
 <div class="p-5 min-vh-100 d-inline-block">
-  <h4>About Me</h4>
+  <h3>About Me</h3>
   <div class="row">
     <div class="col-3">
       <div class="headshot">
@@ -46,7 +46,7 @@
       <p>I am a long time freelance graphic designer and web developer turned engineer. Over the last several years I have completed my Masters of Science in Computer Science with a focus on applied data analytics, making me an ideal data engineer for any team.</p>
       <p>My approach to solving problems is by diving in, getting my hands dirty, making mistakes, and asking for help. I'm a natural leader, a problem solver, and have an affinity for statistics.</p>
       <h5>Current Roles</h5>
-      {% for job in jobs %}
+      {% for job in current_jobs %}
       <div class="job_desc">
         <p class="location">{{ job.company }}: {{ job.department }}</p>
         <p class="title">{{ job.job_name }}</p>
@@ -55,18 +55,39 @@
     </div>
   </div>
 </div>
-<div id="resume" class="p-4" style="width:100%; height:10px;"></div>
+<div id="projects" class="p-4" style="width:100%; height:10px;"></div>
 <div class="p-5 min-vh-100 d-inline-block">
-  <h4>Resume</h4>
+  <h3>Projects</h3>
   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
 </div>
-<div id="projects" class="p-4" style="width:100%; height:10px;"></div>
+<div id="resume" class="p-4" style="width:100%; height:10px;"></div>
 <div class="p-5 min-vh-100 d-inline-block">
-  <h4>Third heading</h4>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+  <h3>Resume</h3>
+  <h5>Education</h5>
+  <div class="degree">
+    <p class="name">Masters of Science in Computer Science</p>
+    <p class="concentration">Data Analytics</p>
+    <p class="school">Boston University</p>
+  </div>
+  <div class="degree">
+    <p class="name">Bachelor of Arts in Sociology</p>
+    <p class="concentration">Queer Studies</p>
+    <p class="school">Boston University</p>
+  </div>
+  <h5>Work History</h5>
+  {% for job in jobs %}
+  <div class="resume_block">
+    <p>{{ job }}</p>
+    <ul>
+      {% for responsibility in responsibilities %}
+        {% if job == responsibility.job %}
+          <li>{{ responsibility }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}
