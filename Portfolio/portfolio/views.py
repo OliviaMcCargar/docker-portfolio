@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 
-from .models import Project, Job
+from .models import Project, Job, Responsibility
 
 class IndexView(generic.ListView):
     template_name = 'portfolio/index.html'
@@ -15,7 +15,12 @@ class IndexView(generic.ListView):
     
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['jobs'] = Job.objects.filter(current_job=True)
+        context['jobs'] = Job.objects.all()
+        context['current_jobs'] = Job.objects.filter(current_job=True)
+        context['responsibilities'] = Responsibility.objects.all()
+        context['spc_responsibilities'] = Responsibility.objects.filter(job__id=1)
+        context['apc_responsibilities'] = Responsibility.objects.filter(job__id=2)
+        context['da_responsibilities'] = Responsibility.objects.filter(job__id=3)
         return context
 
 class ProjectView(generic.DetailView):

@@ -29,7 +29,7 @@ class Responsibility(models.Model):
     responsibility_name = models.CharField(max_length=200)
     description = models.CharField(max_length=2000)
     def __str__(self):
-        return self.responsibility_name
+        return self.description
 
 class Project(models.Model):
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
