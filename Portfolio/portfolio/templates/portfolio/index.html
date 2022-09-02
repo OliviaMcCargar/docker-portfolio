@@ -37,14 +37,26 @@
   <h3>About Me</h3>
   <div class="row">
     <div class="col-3">
-      <div class="headshot">
+      <div class="headshot mb-2">
         <img class="rounded" src="{% static 'images/liv_headshot.png' %}" alt="Headshot of Olivia">
+      </div>
+      <div class="container mb-2" style="text-align: center;">
+        <a href="{% static 'documents/Olivia McCargar Resume 2022.pdf' %}" class="m-auto btn btn-primary">Download Resume</a>
       </div>
     </div>
     <div class="col-9">
       <p>I am actively looking for the right company for me.</p>
       <p>I am a long time freelance graphic designer and web developer turned engineer. Over the last several years I have completed my Masters of Science in Computer Science with a focus on applied data analytics, making me an ideal data engineer for any team.</p>
       <p>My approach to solving problems is by diving in, getting my hands dirty, making mistakes, and asking for help. I'm a natural leader, a problem solver, and have an affinity for statistics.</p>
+      <div class="contact">
+        <h5>Contact</h5>
+        <p>
+          Email: <a href="mailto:OliviaMcCargar@gmail.com">OliviaMcCargar@gmail.com</a> </br>
+          Github: <a href="https://github.com/OliviaMcCargar/">https://github.com/OliviaMcCargar/</a> </br>
+          Linkedin: <a href="https://www.linkedin.com/in/olivia-mccargar/">https://www.linkedin.com/in/olivia-mccargar/</a>
+        </p>
+      </div>
+      
       <h5>Current Roles</h5>
       {% for job in current_jobs %}
       <div class="job_desc">
@@ -56,15 +68,38 @@
   </div>
 </div>
 <div id="projects" class="p-4" style="width:100%; height:10px;"></div>
-<div class="p-5 min-vh-100 d-inline-block">
+<div class="container-fluid p-5 min-vh-100 d-inline-block justify-content-center">
   <h3>Projects</h3>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
-  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, quasi eos tempore dolore voluptates soluta vero similique mollitia, veritatis quas officiis cupiditate a delectus esse accusamus officia ea voluptatibus quam.</p>
+    {% for project in latest_project_list %}
+    <div class="row mb-2 px-5">
+      <div class="card m-auto col">
+        <div class="card-header">
+          <p class="card-text status">{{ project.outcome }}</p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"> {{ project }} </h5>
+          <p class="card-text description">{{ project.short_description }}</p>
+          <p class="card-text timeline">{{ project.timeline }}</p>
+          <a href="{% url 'portfoilo:project' project.project_shortname %}" class="btn btn-primary">View Details</a>
+        </div>
+        <div class="card-footer text-muted">
+          <p class="card-text languages">{{ project.languages }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
 </div>
 <div id="resume" class="p-4" style="width:100%; height:10px;"></div>
 <div class="container p-5 min-vh-100 d-inline-block">
   <h3>Resume</h3>
+  <h5>Skills</h5>
+  <div class="row px-5 mb-4">
+    <ul>
+      <li>Programming/ scripting languages: C++, C#, JavaScript, HTML, CSS, PHP, R, Python, SQL</li>
+      <li>Frameworks/ Libraries: SCSS, Node.js, Tidyverse, Pandas, Numpy, Dash, Django</li>
+      <li>Other development tools: Linux CLI, Docker, Git, AWS (basics)</li>
+    </ul>
+  </div>
   <h5>Education</h5>
   <div class="row px-5 mb-4">
     <div class="col-sm-auto degree">

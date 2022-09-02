@@ -38,8 +38,11 @@ class Project(models.Model):
     project_name = models.CharField(max_length=200)
     project_shortname = models.CharField(max_length=20, unique=True)
     description = models.TextField(max_length=2000)
+    short_description = models.CharField(max_length=500)
     outcome = models.CharField(max_length=2000)
     timeline = models.CharField(max_length=200)
+    languages = models.CharField(max_length=300)
+    display_order = models.IntegerField()
     link = models.URLField()
     def __str__(self):
         return self.project_name
