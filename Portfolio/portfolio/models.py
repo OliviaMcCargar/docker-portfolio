@@ -20,6 +20,8 @@ class Job(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     current_job = models.BooleanField()
+    projects_only = models.BooleanField()
+    display_order = models.IntegerField()
     def __str__(self):
         return self.job_name
     
