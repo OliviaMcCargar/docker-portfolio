@@ -101,3 +101,32 @@ $rgba-complement-4: rgba( 54,  3, 92,1);
     }
   }
 }
+
+.degree {
+  p {
+    margin: 0;
+    &.name {
+      font-weight: bold;
+    }
+    &.concentration {
+      font-weight: 300;
+      font-style: italic;
+      &:before {
+        content: "Concentration: "
+      }
+    }
+  }
+}
+
+.resume_block {
+  p {
+    margin: 0;
+    &.title {
+      font-weight: bold;
+      .dates {
+        font-weight: 300;
+        font-style: italic;
+      }
+    }
+  }
+}

@@ -15,8 +15,9 @@ class IndexView(generic.ListView):
     
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['jobs'] = Job.objects.all()
+        context['jobs'] = Job.objects.filter(projects_only = False).order_by("display_order")
         context['current_jobs'] = Job.objects.filter(current_job=True)
+        context['current_jobs'] = context['current_jobs'].filter(projects_only=False)
         context['responsibilities'] = Responsibility.objects.all()
         context['spc_responsibilities'] = Responsibility.objects.filter(job__id=1)
         context['apc_responsibilities'] = Responsibility.objects.filter(job__id=2)

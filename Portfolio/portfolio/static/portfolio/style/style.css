@@ -32,4 +32,29 @@
   font-weight: 200;
 }
 
+.degree p {
+  margin: 0;
+}
+.degree p.name {
+  font-weight: bold;
+}
+.degree p.concentration {
+  font-weight: 300;
+  font-style: italic;
+}
+.degree p.concentration:before {
+  content: "Concentration: ";
+}
+
+.resume_block p {
+  margin: 0;
+}
+.resume_block p.title {
+  font-weight: bold;
+}
+.resume_block p.title .dates {
+  font-weight: 300;
+  font-style: italic;
+}
+
 /*# sourceMappingURL=style.css.map */
