@@ -1,0 +1,14 @@
+{% include "project.html" %}
+
+{% load static %}
+
+{% block title %}{{ project.project_name }}{% endblock %}
+
+{% block content %}
+    <h2>Oops it's Twitter</h2>
+    <h1>{{ project.project_name }}</h1>
+    <p> {{ project.description|linebreaks }}</p>
+{% endblock %}
+    
+    
+    
