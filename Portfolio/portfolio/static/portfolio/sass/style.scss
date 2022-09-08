@@ -131,6 +131,13 @@ $rgba-complement-4: rgba( 54,  3, 92,1);
   }
 }
 
+.summary_info {
+  margin-bottom: 1em;
+  p {
+    margin: 0;
+  }
+}
+
 .card { 
   margin: 0.3em;
   padding-right:0 !important;
