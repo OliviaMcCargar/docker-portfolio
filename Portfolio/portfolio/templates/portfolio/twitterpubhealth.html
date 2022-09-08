@@ -1,13 +1,310 @@
-{% include "project.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 
 {% block title %}{{ project.project_name }}{% endblock %}
 
 {% block content %}
-    <h2>Oops it's Twitter</h2>
-    <h1>{{ project.project_name }}</h1>
-    <p> {{ project.description|linebreaks }}</p>
+<nav id="primary-navbar" class="navbar sticky-top bg-light px-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'portfoilo:index' %}#aboutme">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'portfoilo:index' %}#projects">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'portfoilo:index' %}#resume">Resume</a>
+      </li>
+    </ul>
+    <a class="navbar-brand" href="{% url 'portfoilo:index' %}">OKM</a>
+</nav>
+<div class="p-5 min-vh-100">
+    <h1 class="text-center">{{ project.project_name }}</h1>
+    <div class="row">
+        <div class="col mb-3">
+            <h4>Basic Overview</h4>
+            <div class="summary_info">
+                <p><strong>Status:</strong> {{ project.outcome }}</p>
+                <p><strong>Timeline:</strong> {{ project.timeline }}</p>
+                <p><strong>Technology:</strong> {{ project.languages }}</p>
+            </div>
+            <p>Note: Source code for the twitter data mining is not provided out of an abundance of caution for my own developer account, but I am happy to talk through my process. I used Twitter's API accessed via the rtweet package; nothing particularly complicated nor technically worth bragging about.</p>
+            <a class="btn btn-primary" download href="{% static 'code/McCargar, Olivia- TwitterPubHealth.zip' %}" role="button">Download Source Code</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Why Twitter for Public Health?</h4>
+            <p class="lead pl-5">80%+ of Americans Get News Primarily Online</p>
+            <figure class="px-5">
+                <blockquote class="blockquote">
+                    <p style="font-size: 80%;"><em>A large majority of Americans get news at least sometimes from digital devices, according to <a href="https://www.pewresearch.org/journalism/2021/01/12/news-use-across-social-media-platforms-in-2020/">a Pew Research Center survey</a> conducted Aug. 31-Sept. 7, 2020.</em></p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    <cite title="Source Title"><a href="https://www.pewresearch.org/fact-tank/2021/01/12/more-than-eight-in-ten-americans-get-news-from-digital-devices/">PEW Research</a></cite>
+                </figcaption>
+            </figure>
+            <p class="lead pl-5">Social media has a disproportionate effect on the disbursal of false information</p>
+            <figure class="px-5">
+                <blockquote class="blockquote">
+                    <p style="font-size: 80%;"><em>The Center for Countering Digital Hate, a nonprofit whose work focuses on misinformation and hate disseminated online, conducted the study to examine the origins of anti-vaccine sentiment that has gained momentum on social networking platforms during the coronavirus pandemic. Results pinpointed a group of 12 individuals, collectively referred to as "the disinformation dozen" in the CCDH's conclusory report, who are at the forefront of false information campaigns targeting COVID-19 vaccines on Facebook, Instagram and Twitter.</em></p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    <cite title="Source Title"><a href="https://www.newsweek.com/over-60-anti-vax-content-twitter-facebook-originates-12-people-study-shows-1578803">Newsweek</a></cite>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Method</h4>
+            <ul>
+                <li>Identify a variety of news organizations representing various viewpoints in American politics</li>
+                <li>Find “high influence” followers of these news organizations on twitter (top 50 number of follower users per org)</li>
+                <li>Draw 1000 tweets from these followers' timelines</li>
+                <li>Isolate tweets with public health terms</li>
+                <li>Perform sentiment analysis on these public health related tweets</li>
+                <li>Test for any differences in results by news org they follow using one-way ANOVA and grouping</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Summary of Results</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">News Org</th>
+                        <th scope="col" class="text-center">Number of Tweets</th>
+                        <th scope="col" class="text-center">Average Sentiment</th>
+                        <th scope="col" class="text-center">Median Sentiment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">ABC News</th>
+                        <td class="text-center">1258</td>
+                        <td class="text-center">-0.11</td>
+                        <td class="text-center">0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>BBC News (World)</th>
+                        <td class='text-center'>1224</td>
+                        <td class='text-center'>-0.02</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Bloomberg</th>
+                        <td class='text-center'>582</td>
+                        <td class='text-center'>-0.17</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CBS News</th>
+                        <td class='text-center'>1953</td>
+                        <td class='text-center'>-0.2</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CDC</th>
+                        <td class='text-center'>2660</td>
+                        <td class='text-center'>-0.01</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CNBC</th>
+                        <td class='text-center'>1234</td>
+                        <td class='text-center'>0.15</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CNN</th>
+                        <td class='text-center'>423</td>
+                        <td class='text-center'>0.13</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Forbes</th>
+                        <td class='text-center'>1460</td>
+                        <td class='text-center'>0.05</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Fox News</th>
+                        <td class='text-center'>1094</td>
+                        <td class='text-center' style='color:red;'>-0.22</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>NBC News</th>
+                        <td class='text-center'>733</td>
+                        <td class='text-center' style='color:green;'>0.22</td>
+                        <td class='text-center' style='color:green;'>1</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Reuters</th>
+                        <td class='text-center'>1835</td>
+                        <td class='text-center'>0.07</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Associated Press</th>
+                        <td class='text-center'>2566</td>
+                        <td class='text-center'>-0.12</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Economist</th>
+                        <td class='text-center'>1315</td>
+                        <td class='text-center'>0.11</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Guardian</th>
+                        <td class='text-center'>2077</td>
+                        <td class='text-center'>-0.06</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The New York Times</th>
+                        <td class='text-center'>1255</td>
+                        <td class='text-center'>-0.03</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Wall Street Journal</th>
+                        <td class='text-center'>923</td>
+                        <td class='text-center'>0.16</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Washington Post</th>
+                        <td class='text-center'>1075</td>
+                        <td class='text-center'>-0.08</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>TIME</th>
+                        <td class='text-center'>415</td>
+                        <td class='text-center'>-0.05</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>World Health Organization (WHO)</th>
+                        <td class='text-center'>1450</td>
+                        <td class='text-center'>0.11</td>
+                        <td class='text-center'>0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="container">
+                <img style="max-width:100%" src="{% static 'images/Sentiment by News Org Followed (Boxplot).png' %}" alt="Sentiment by News Org Followed Boxplot">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Tukey Summary Groups</h4>
+            <p>The above reults may be hard to interpret and lack confidence intervals, so to determine significant difference I performed a one way ANOVA between each news org results with Tukey's honest significant difference wit ha 95% confidence interval. Each news org was the nassigned to one of several possible groups, represented by a letter; if a news org shares a letter with another news org, then there is nothing in the data to suggest a significant difference between the groups. However, if the news orgs share <em>no</em> letters, then there is evidence that the difference in sentiment is significant.</p>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">News Org</th>
+                        <th scope="col" class="text-center">Groups</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope='row'>ABC News</th>
+                        <td class='text-center'>abce</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">BBC News (World)</th>
+                        <td class="text-center">abcdef</th>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Bloomberg</th>
+                        <td class='text-center'>abce</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CBS News</th>
+                        <td class='text-center'>a</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CDC</th>
+                        <td class='text-center'>bcdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CNBC</th>
+                        <td class='text-center'>df</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>CNN</th>
+                        <td class='text-center'>abcdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Forbes</th>
+                        <td class='text-center'>bdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Fox News</th>
+                        <td class='text-center'>ac</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>NBC News</th>
+                        <td class='text-center'>d</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>Reuters</th>
+                        <td class='text-center'>bdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Associated Press</th>
+                        <td class='text-center'>ace</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Economist</th>
+                        <td class='text-center'>bdf</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Guardian</th>
+                        <td class='text-center'>abcef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The New York Times</th>
+                        <td class='text-center'>abcdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Wall Street Journal</th>
+                        <td class='text-center'>bdf</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>The Washington Post</th>
+                        <td class='text-center'>abcdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>TIME</th>
+                        <td class='text-center'>abcdef</td>
+                    </tr>
+                    <tr>
+                        <th scope='row'>World Health Organization (WHO)</th>
+                        <td class='text-center'>bdf</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>Conclusions</h4>
+            <p>There are some significant difference between groups in my findings that suggest which news sources a person turns to may affect their perception of various public health efforts.</p>
+            <p>However, this represents a tiny cross section of data, only ~38,000 tweets that were determined to be relevant from a pool of ~750,000. With a longer term project and a larger pool of data, there may be more clarity and confidence in the results. The Twitter API time limit severely limited my ability to mine for a significant number of tweets quickly.</p>
+            <p>May also need to work on a paired down list of public health terms, and do more data exploration for relevance (especially outliers!)</p>
+        </div>
+    </div>
+</div>
+    
 {% endblock %}
     
     
