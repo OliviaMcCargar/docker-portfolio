@@ -49,3 +49,16 @@ class TwitterPubHealthView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['project'] = self.project
         return context
+
+class StageSourceCensusView(generic.DetailView):
+    model = Project
+    template_name = 'portfolio/stagesourcecensus.html'
+
+    def get_object(self):
+        self.project = get_object_or_404(Project, project_shortname__exact='stagesourcecensus')
+        return Project.objects.filter(id=self.project.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['project'] = self.project
+        return context

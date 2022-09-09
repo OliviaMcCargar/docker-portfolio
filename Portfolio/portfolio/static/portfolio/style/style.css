@@ -57,6 +57,13 @@
   font-style: italic;
 }
 
+.summary_info {
+  margin-bottom: 1em;
+}
+.summary_info p {
+  margin: 0;
+}
+
 .card {
   margin: 0.3em;
   padding-right: 0 !important;
