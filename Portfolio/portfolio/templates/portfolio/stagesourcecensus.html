@@ -29,7 +29,7 @@
                 <p><strong>Timeline:</strong> {{ project.timeline }}</p>
                 <p><strong>Technology:</strong> {{ project.languages }}</p>
             </div>
-            <p>Note: The full project includes personally identifying information so code has been modified to obscure this.</p>
+            <p>Note: The full project includes personally identifying information so code has been modified and data omitted to obscure this.</p>
             <a class="btn btn-primary" download href="{% static 'code/McCargar, Olivia- StageSourceCensus.zip' %}" role="button">Download Source Code</a>
         </div>
     </div>
@@ -50,7 +50,22 @@
             </ul>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
+        <div class="col">
+            <h4>Data Ingestion</h4>
+            <p>My first task was designing a permanent home for the data that was more organized than the default output from surveymonkey, the site used by StageSource to create the survey parts. I had a lot of different data to use, and this design needed a lot of updates as the messy data got cleaned and the needs of analysis became clear, but the foundation did not deviate from here.</p>
+            <div class="col text-center my-3">
+                <img style="max-width:80%" src="{% static 'images/stagesourcecensus/Census Entity Relationship Diagram.png' %}" alt="The New England Theatre Census ERD">
+            </div>
+            <p>The design may seem odd to people who are familiar with conventions of storing demographic data, but per StageSource's survey design, respondents could have one <em>or more</em> self-descriptors for each and every demographic vector. While the numerous tables is not helpful for analysis, it does make it easier and more efficient for storing, adding new options, and updating the data should respondents wish to update their self descriptors later.</p>
+            <p>I refined this ERD diagram into a relational database scheme:</p>
+            <div class="col text-center my-3">
+                <img style="max-width:80%" src="{% static 'images/stagesourcecensus/Stagesource Census Relational Database.png' %}" alt="The New England Theatre Census Relational Database Diagram">
+            </div>
+            With this scheme to work off of, I wrote a python script to ingest the surveys in their raw forms (with some minor manual changes to column headers) and output the data in this schema, ready to import into a SQLite server. With the server created, I wrote queries to generate useable tabels for the demographic analysis as well as for the income analysis. 
+        </div>
+    </div>
+    <div class="row mb-3">
         <div class="col">
             <h4>Demographic Overview Approach</h4>
             <p>After writing the script to ingest the data into a SQLite database, I wrote two quiries to generate a demographic overview and an income overview. I wrote a basic R markdown script to slice the demographic data and generated the charts below using ggplot.</p>
@@ -253,7 +268,7 @@
                 <img style="max-width:80%" src="{% static 'images/stagesourcecensus/Tukey Income by Gender (Weekly).png' %}" alt="Tukey Groups and Boxplot Income by Gender (Only Paid Weekly)">
             </div>
             <p>When I look at people paid weekly I find no significant difference between groups.</p>
-            <p>For both of these tests I cna say that my assumptions hold and the tests are valid.</p>
+            <p>For both of these tests I can say that my assumptions hold and the tests are valid.</p>
             <h5>Sexuality</h5>
             <p>I found significant interaction with <em>every</em> reported income scale so the data had to be split four ways for analysis.</p>
             <div class="container text-center mb-3">
