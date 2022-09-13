@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{{ project.project_name }}{% endblock %}
+
+{% block content %}
+<nav id="primary-navbar" class="navbar sticky-top bg-light px-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'portfoilo:index' %}#aboutme">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'portfoilo:index' %}#projects">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'portfoilo:index' %}#resume">Resume</a>
+      </li>
+    </ul>
+    <a class="navbar-brand" href="{% url 'portfoilo:index' %}">OKM</a>
+</nav>
+<div class="p-5 min-vh-100">
+    <h1 class="text-center">{{ project.project_name }}</h1>
+    <div class="row mb-3">
+        <div class="col">
+            <h4>Basic Overview</h4>
+            <div class="summary_info">
+                <p><strong>Status:</strong> {{ project.outcome }}</p>
+                <p><strong>Timeline:</strong> {{ project.timeline }}</p>
+                <p><strong>Technology:</strong> {{ project.languages }}</p>
+            </div>
+            <p>Note: Source code for the twitter data mining is not provided out of an abundance of caution for my own developer account, but I am happy to talk through my process. I used Twitter's API accessed via the rtweet package; nothing particularly complicated nor technically worth bragging about.</p>
+            <a class="btn btn-primary" download href="{% static 'code/McCargar, Olivia- TwitterPubHealth.zip' %}" role="button">Download Source Code</a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col text-center">
+            <a href="http://www.transpop.org/"><img style="max-width:80%;" src="{% static 'images/transpop/tanspop logo.jpg' %}" alt="TransPop Survey Logo"></a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <h4>Motivation</h4>
+            <p>Transgender people are spoken <em>about</em> at large in the media but very little attention is given to their needs, and even less to understanding how to improve their lives. The TransPop survey is an opportunity to peer into trans peoples' lives and glean how systems can be changed to improve them. My initial analysis sought to find predictive attributes - questions in the survey - for an overall life satisfaction. The dashboard, which is still a work in progress, will allow people to draw comparisons using one of the other outcomes metrics.</p>
+            <p>The data can be found in it's original form online at <a href="https://www.icpsr.umich.edu/web/ICPSR/studies/37938">https://www.icpsr.umich.edu/web/ICPSR/studies/37938</a></p>
+        </div>
+    </div>
+    
+</div>
+    
+{% endblock %}
+    
+    
+    
