@@ -62,3 +62,16 @@ class StageSourceCensusView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         context['project'] = self.project
         return context
+
+class TransPopView(generic.DetailView):
+    model = Project
+    template_name = 'portfolio/transpop.html'
+
+    def get_object(self):
+        self.project = get_object_or_404(Project, project_shortname__exact='transpop')
+        return Project.objects.filter(id=self.project.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['project'] = self.project
+        return context
